@@ -50,7 +50,7 @@ env variables will affect the values used for these, respectively:
 * APID_API_PORT
 * APID_COUNTERS_BASE_PATH
 
-For example, if you set the `APID_COUNTERS_BASE_PATH` env var to something `/test`, all the paths above will 
+For example, if you set the `APID_COUNTERS_BASE_PATH` env var to `/test`, all the paths above will 
 be based at `/test` instead of `/counters`.
 
 
