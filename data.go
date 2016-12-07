@@ -11,7 +11,7 @@ const (
 
 var (
 	data apid.DataService
-	db   *sql.DB
+	db   apid.DB
 )
 
 // initializes the data source
@@ -72,23 +72,26 @@ func incrementDBCounter(id string) error {
 
 // return the counter for a given id
 func getDBCounter(id string) (int, error) {
-	log.Debug("get DB counter")
+	log.Debugf("get DB counter: %s", id)
 
 	var count int
 	err := db.QueryRow("select counter from apidExamplePlugin where id = ?;", id).Scan(&count)
 	if err != nil {
 		if err == sql.ErrNoRows {
+			log.Debugf("counter %s: %v", id, 0)
 			return 0, nil
 		}
 		log.Errorf("unable to query DB: %v", err)
 	}
+
+	log.Debugf("counter %s: %v", id, count)
 
 	return count, err
 }
 
 // return a map of all the stored counters
 func getDBCounters() (result map[string]int, err error) {
-	log.Debug("get DB counter")
+	log.Debug("get DB counters")
 
 	var (
 		id    string
@@ -97,6 +100,7 @@ func getDBCounters() (result map[string]int, err error) {
 	)
 
 	rows, err = db.Query("select id, counter from apidExamplePlugin order by id;")
+	defer rows.Close()
 	if err != nil {
 		log.Errorf("unable to query DB: %v", err)
 		return
@@ -106,6 +110,8 @@ func getDBCounters() (result map[string]int, err error) {
 		rows.Scan(&id, &count)
 		result[id] = count
 	}
+
+	log.Debugf("counters: %v", result)
 
 	return
 }
