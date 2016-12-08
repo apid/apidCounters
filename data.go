@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	databaseID = "apidExamplePlugin"
+	databaseID = "apidCounters"
 )
 
 var (
@@ -28,7 +28,7 @@ func initDB(services apid.Services) error {
 	}
 
 	// if table doesn't already exist, create it
-	row := db.QueryRow("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='apidExamplePlugin';")
+	row := db.QueryRow("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='apidCounters';")
 	var count int
 	err = row.Scan(&count)
 	if err != nil {
@@ -36,7 +36,7 @@ func initDB(services apid.Services) error {
 		return err
 	}
 	if count == 0 {
-		_, err := db.Exec("CREATE TABLE apidExamplePlugin (id text, counter integer);")
+		_, err := db.Exec("CREATE TABLE apidCounters (id text, counter integer);")
 		if err != nil {
 			log.Errorf("unable to query DB: %v", err)
 			return err
@@ -50,13 +50,13 @@ func initDB(services apid.Services) error {
 func incrementDBCounter(id string) error {
 	log.Debugf("increment DB counter for %s", id)
 
-	res, err := db.Exec("update apidExamplePlugin set counter = counter + 1 where id = ?;", id)
+	res, err := db.Exec("update apidCounters set counter = counter + 1 where id = ?;", id)
 	var nRows int64
 	if err == nil {
 		// note: no potential race condition because events are queued
 		nRows, err = res.RowsAffected()
 		if nRows == 0 {
-			res, err = db.Exec("insert into apidExamplePlugin values(?, 1);", id)
+			res, err = db.Exec("insert into apidCounters values(?, 1);", id)
 			if err == nil {
 				nRows, err = res.RowsAffected()
 			}
@@ -75,7 +75,7 @@ func getDBCounter(id string) (int, error) {
 	log.Debugf("get DB counter: %s", id)
 
 	var count int
-	err := db.QueryRow("select counter from apidExamplePlugin where id = ?;", id).Scan(&count)
+	err := db.QueryRow("select counter from apidCounters where id = ?;", id).Scan(&count)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			log.Debugf("counter %s: %v", id, 0)
@@ -99,7 +99,7 @@ func getDBCounters() (result map[string]int, err error) {
 		rows  *sql.Rows
 	)
 
-	rows, err = db.Query("select id, counter from apidExamplePlugin order by id;")
+	rows, err = db.Query("select id, counter from apidCounters order by id;")
 	defer rows.Close()
 	if err != nil {
 		log.Errorf("unable to query DB: %v", err)

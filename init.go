@@ -23,7 +23,7 @@ func init() {
 }
 
 // initPlugin will be called by apid to initialize
-func initPlugin(services apid.Services) error {
+func initPlugin(services apid.Services) (apid.PluginData, error) {
 
 	// set a logger that is annotated for this plugin
 	log = services.Log().ForModule("counters")
@@ -39,7 +39,7 @@ func initPlugin(services apid.Services) error {
 	// in this example we check for someConfigurationKey, but normally we wouldn't check defaulted values
 	for _, key := range []string{configCountersBasePath} {
 		if !config.IsSet(key) {
-			return fmt.Errorf("Missing required config value: %s", key)
+			return pluginData, fmt.Errorf("Missing required config value: %s", key)
 		}
 	}
 
@@ -52,9 +52,9 @@ func initPlugin(services apid.Services) error {
 	// set data service (see data.go)
 	err := initDB(services)
 	if err != nil {
-		return err
+		return pluginData, err
 	}
 
 	log.Debug("end init")
-	return nil
+	return pluginData, nil
 }
