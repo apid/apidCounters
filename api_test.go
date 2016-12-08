@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"time"
 )
 
 // BeforeSuite setup and AfterSuite cleanup is in apidCounters_suite_test.go
@@ -56,6 +57,7 @@ var _ = Describe("api", func() {
 		body, err := ioutil.ReadAll(resp.Body)
 		Expect(string(body)).Should(Equal(strconv.Itoa(count)))
 
+		time.Sleep(50 * time.Millisecond) // todo: hack - make this a listen event on incr event finished
 		count, err = getDBCounter(counter)
 		Expect(err).NotTo(HaveOccurred())
 		Expect(count).To(Equal(1))
