@@ -1,7 +1,7 @@
 package apidCounters
 
 import (
-	"github.com/30x/apid"
+	"github.com/30x/apid-core"
 )
 
 const (

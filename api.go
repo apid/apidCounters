@@ -2,9 +2,10 @@ package apidCounters
 
 import (
 	"encoding/json"
-	"github.com/30x/apid"
 	"net/http"
 	"strconv"
+
+	"github.com/30x/apid-core"
 )
 
 var countersBasePath string
