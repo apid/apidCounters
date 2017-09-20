@@ -1,7 +1,7 @@
 package apidCounters
 
 import (
-	"github.com/30x/apid-core"
+	"github.com/apid/apid-core"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

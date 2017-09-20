@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/30x/apid-core"
-	"github.com/30x/apid-core/factory"
-	_ "github.com/30x/apidCounters"
+	"github.com/apid/apid-core"
+	"github.com/apid/apid-core/factory"
+	_ "github.com/apid/apidCounters"
 )
 
 func main() {
