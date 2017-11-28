@@ -2,7 +2,7 @@ package apidCounters
 
 import (
 	"fmt"
-	"github.com/30x/apid-core"
+	"github.com/apid/apid-core"
 )
 
 const (
@@ -19,7 +19,7 @@ var (
 
 // apid.RegisterPlugin() is required to be called in init()
 func init() {
-	apid.RegisterPlugin(initPlugin)
+	apid.RegisterPlugin(initPlugin, pluginData)
 }
 
 // initPlugin will be called by apid to initialize

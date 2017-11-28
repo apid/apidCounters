@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/30x/apid-core"
-	"github.com/30x/apid-core/factory"
-	_ "github.com/30x/apidCounters"
+	"github.com/apid/apid-core"
+	"github.com/apid/apid-core/factory"
+	_ "github.com/apid/apidCounters"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	log.Debug("initializing...")
 
 	// this will call all initialization functions on all registered plugins
-	apid.InitializePlugins()
+	apid.InitializePlugins("0.0.1")
 
 	// print the base url to the console
 	config := apid.Config()

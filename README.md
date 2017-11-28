@@ -1,6 +1,6 @@
 # apidCounters
 
-This is an EXAMPLE plugin for [apid](http://github.com/30x/apid). It shows how to register as a plugin and 
+This is an EXAMPLE plugin for [apid](http://github.com/apid/apid). It shows how to register as a plugin and 
 use apid's API, Config, Data, Events, and Log Services. In addition, it shows how to write integration tests
 that use these services. This is not necessary intended to be a production-ready apid component. 
 
