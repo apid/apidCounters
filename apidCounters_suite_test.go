@@ -1,8 +1,8 @@
 package apidCounters
 
 import (
-	"github.com/30x/apid-core"
-	"github.com/30x/apid-core/factory"
+	"github.com/apid/apid-core"
+	"github.com/apid/apid-core/factory"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"io/ioutil"
@@ -31,7 +31,7 @@ var _ = BeforeSuite(func() {
 
 	// initialize apid
 	// note: this will call initPlugin()
-	apid.InitializePlugins()
+	apid.InitializePlugins("test")
 
 	// get the router - this will already have the plugin routes registered
 	router := apid.API().Router()

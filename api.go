@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/30x/apid-core"
+	"github.com/apid/apid-core"
 )
 
 var countersBasePath string

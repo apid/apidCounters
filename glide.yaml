@@ -1,6 +1,6 @@
-package: github.com/30x/apidApigeeSync
+package: github.com/apid/apidCounters
 import:
-- package: github.com/30x/apid-core
+- package: github.com/apid/apid-core
 testImport:
 - package: github.com/onsi/ginkgo/ginkgo
 - package: github.com/onsi/gomega
