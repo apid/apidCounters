@@ -27,5 +27,5 @@ func main() {
 	// start client API listener
 	api := apid.API()
 	err := api.Listen() // doesn't return if no error
-	log.Fatalf("Error. Is something already running on port %d? %s", port, err)
+	log.Fatalf("Error. Is something already running on port %s? %s", port, err)
 }

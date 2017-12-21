@@ -1,5 +1,7 @@
 # apidCounters
 
+[![Build Status](https://travis-ci.org/apid/apidCounters.svg)](https://travis-ci.org/apid/apidCounters) [![GoDoc](https://godoc.org/github.com/apid/apidCounters?status.svg)](https://godoc.org/github.com/apid/apidCounters) [![Go Report Card](https://goreportcard.com/badge/github.com/apid/apidCounters)](https://goreportcard.com/report/github.com/apid/apidCounters)
+
 This is an EXAMPLE plugin for [apid](http://github.com/apid/apid). It shows how to register as a plugin and 
 use apid's API, Config, Data, Events, and Log Services. In addition, it shows how to write integration tests
 that use these services. This is not necessary intended to be a production-ready apid component. 

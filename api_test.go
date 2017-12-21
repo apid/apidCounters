@@ -28,11 +28,11 @@ var _ = Describe("api", func() {
 		uri.Path = fmt.Sprintf(countersBasePath+"/%s", counter)
 
 		resp, err := http.Get(uri.String())
-		defer resp.Body.Close()
 		Expect(err).ShouldNot(HaveOccurred())
+		defer resp.Body.Close()
 		Expect(resp.StatusCode).Should(Equal(http.StatusOK))
 
-		body, err := ioutil.ReadAll(resp.Body)
+		body, _ := ioutil.ReadAll(resp.Body)
 		Expect(string(body)).Should(Equal(strconv.Itoa(count)))
 	})
 
@@ -50,8 +50,8 @@ var _ = Describe("api", func() {
 		req, err := http.NewRequest("POST", uri.String(), nil)
 		req.Header.Add("Content-Type", "application/json")
 		resp, err := http.DefaultClient.Do(req)
-		defer resp.Body.Close()
 		Expect(err).ShouldNot(HaveOccurred())
+		defer resp.Body.Close()
 		Expect(resp.StatusCode).Should(Equal(http.StatusOK))
 
 		body, err := ioutil.ReadAll(resp.Body)
@@ -79,8 +79,8 @@ var _ = Describe("api", func() {
 		uri.Path = countersBasePath
 
 		resp, err := http.Get(uri.String())
-		defer resp.Body.Close()
 		Expect(err).ShouldNot(HaveOccurred())
+		defer resp.Body.Close()
 		Expect(resp.StatusCode).Should(Equal(http.StatusOK))
 
 		body, err := ioutil.ReadAll(resp.Body)
